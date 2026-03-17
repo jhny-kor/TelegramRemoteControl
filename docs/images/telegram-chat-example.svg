@@ -1,0 +1,42 @@
+<svg width="1200" height="940" viewBox="0 0 1200 940" fill="none" xmlns="http://www.w3.org/2000/svg">
+  <rect width="1200" height="940" fill="#E9EEF4"/>
+  <rect x="120" y="40" width="960" height="860" rx="36" fill="#F7FAFD"/>
+  <rect x="120" y="40" width="960" height="96" rx="36" fill="#2A5B8A"/>
+  <circle cx="180" cy="88" r="24" fill="#F7FAFD" fill-opacity="0.18"/>
+  <path d="M173 88L187 80L183 96L178 91L173 88Z" fill="#F7FAFD"/>
+  <text x="225" y="83" fill="#F7FAFD" font-family="Arial, Helvetica, sans-serif" font-size="30" font-weight="700">remoteBot</text>
+  <text x="225" y="113" fill="#D8E6F3" font-family="Arial, Helvetica, sans-serif" font-size="18">TelegramRemoteControl example conversation</text>
+
+  <rect x="170" y="180" width="170" height="64" rx="20" fill="#DDE8F4"/>
+  <text x="202" y="220" fill="#23405D" font-family="Arial, Helvetica, sans-serif" font-size="28" font-weight="700">/ping</text>
+
+  <rect x="410" y="178" width="520" height="90" rx="22" fill="#D6F4DB"/>
+  <text x="442" y="218" fill="#1C5C2C" font-family="Arial, Helvetica, sans-serif" font-size="26" font-weight="700">pong</text>
+  <text x="442" y="248" fill="#356C42" font-family="Arial, Helvetica, sans-serif" font-size="20">server_time: 2026-03-17 23:15:15</text>
+
+  <rect x="170" y="300" width="300" height="64" rx="20" fill="#DDE8F4"/>
+  <text x="198" y="340" fill="#23405D" font-family="Arial, Helvetica, sans-serif" font-size="25" font-weight="700">/status auto_coin_bot</text>
+
+  <rect x="410" y="298" width="540" height="176" rx="22" fill="#D6F4DB"/>
+  <text x="442" y="336" fill="#1C5C2C" font-family="Arial, Helvetica, sans-serif" font-size="24" font-weight="700">[auto_coin_bot] status</text>
+  <text x="442" y="370" fill="#356C42" font-family="Arial, Helvetica, sans-serif" font-size="21">success</text>
+  <text x="442" y="404" fill="#356C42" font-family="Arial, Helvetica, sans-serif" font-size="21">OKX alt: running</text>
+  <text x="442" y="438" fill="#356C42" font-family="Arial, Helvetica, sans-serif" font-size="21">Upbit alt: running</text>
+
+  <rect x="170" y="520" width="160" height="64" rx="20" fill="#DDE8F4"/>
+  <text x="205" y="560" fill="#23405D" font-family="Arial, Helvetica, sans-serif" font-size="28" font-weight="700">/disk</text>
+
+  <rect x="410" y="518" width="560" height="206" rx="22" fill="#D6F4DB"/>
+  <text x="442" y="556" fill="#1C5C2C" font-family="Arial, Helvetica, sans-serif" font-size="24" font-weight="700">disk status</text>
+  <text x="442" y="590" fill="#356C42" font-family="Arial, Helvetica, sans-serif" font-size="21">mac_total: 460.4 GB</text>
+  <text x="442" y="624" fill="#356C42" font-family="Arial, Helvetica, sans-serif" font-size="21">mac_available: 76.7 GB</text>
+  <text x="442" y="658" fill="#356C42" font-family="Arial, Helvetica, sans-serif" font-size="21">documents_total: 1.0 GB</text>
+  <text x="442" y="692" fill="#356C42" font-family="Arial, Helvetica, sans-serif" font-size="21">auto_coin_bot: 1007.6 MB</text>
+
+  <rect x="170" y="766" width="400" height="64" rx="20" fill="#DDE8F4"/>
+  <text x="198" y="806" fill="#23405D" font-family="Arial, Helvetica, sans-serif" font-size="23" font-weight="700">/codex auto_coin_bot update logs</text>
+
+  <rect x="610" y="764" width="360" height="82" rx="22" fill="#D6F4DB"/>
+  <text x="642" y="802" fill="#1C5C2C" font-family="Arial, Helvetica, sans-serif" font-size="22" font-weight="700">Codex job started</text>
+  <text x="642" y="832" fill="#356C42" font-family="Arial, Helvetica, sans-serif" font-size="19">job_id: auto_coin_bot-20260314-170000</text>
+</svg>

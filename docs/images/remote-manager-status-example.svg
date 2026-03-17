@@ -1,0 +1,23 @@
+<svg width="1200" height="760" viewBox="0 0 1200 760" fill="none" xmlns="http://www.w3.org/2000/svg">
+  <rect width="1200" height="760" fill="#151A21"/>
+  <rect x="50" y="40" width="1100" height="680" rx="22" fill="#0E1116" stroke="#2D3642" stroke-width="2"/>
+  <circle cx="95" cy="76" r="10" fill="#FF5F57"/>
+  <circle cx="125" cy="76" r="10" fill="#FEBC2E"/>
+  <circle cx="155" cy="76" r="10" fill="#28C840"/>
+  <text x="200" y="84" fill="#C9D4E2" font-family="Menlo, Consolas, monospace" font-size="26">Terminal - remote_manager</text>
+
+  <text x="84" y="146" fill="#7DD3FC" font-family="Menlo, Consolas, monospace" font-size="24">$ python3 remote_manager.py --daemon</text>
+  <text x="84" y="190" fill="#E5E7EB" font-family="Menlo, Consolas, monospace" font-size="24">remote_manager started in background</text>
+  <text x="84" y="226" fill="#A7F3D0" font-family="Menlo, Consolas, monospace" font-size="24">pid: 98136</text>
+  <text x="84" y="262" fill="#A7F3D0" font-family="Menlo, Consolas, monospace" font-size="24">log: /Users/plo/Documents/remoteBot/logs/remote_manager.out</text>
+
+  <text x="84" y="334" fill="#7DD3FC" font-family="Menlo, Consolas, monospace" font-size="24">$ python3 remote_manager.py --status</text>
+  <text x="84" y="378" fill="#E5E7EB" font-family="Menlo, Consolas, monospace" font-size="24">remote_manager status: running</text>
+  <text x="84" y="414" fill="#A7F3D0" font-family="Menlo, Consolas, monospace" font-size="24">pid: 98136</text>
+  <text x="84" y="450" fill="#A7F3D0" font-family="Menlo, Consolas, monospace" font-size="24">allowed chat ids: ['8672076449']</text>
+
+  <text x="84" y="522" fill="#7DD3FC" font-family="Menlo, Consolas, monospace" font-size="24">$ tail -n 4 logs/remote_manager.out</text>
+  <text x="84" y="566" fill="#FDE68A" font-family="Menlo, Consolas, monospace" font-size="22">[2026-03-17 23:15:13] polling started</text>
+  <text x="84" y="602" fill="#FDE68A" font-family="Menlo, Consolas, monospace" font-size="22">[2026-03-17 23:15:14] received command '/help'</text>
+  <text x="84" y="638" fill="#FDE68A" font-family="Menlo, Consolas, monospace" font-size="22">[2026-03-17 23:15:15] handled command next_offset=293845724</text>
+</svg>

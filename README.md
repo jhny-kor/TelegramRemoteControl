@@ -20,6 +20,16 @@
   - `/disk`
   - `/uptime`
 
+## Screenshots
+
+Telegram command flow example:
+
+![Telegram chat example](docs/images/telegram-chat-example.svg)
+
+Terminal and manager status example:
+
+![remote_manager terminal example](docs/images/remote-manager-status-example.svg)
+
 ## 아키텍처
 
 ```text
