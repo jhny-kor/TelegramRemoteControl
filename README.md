@@ -1,6 +1,6 @@
-# remoteBot
+# TelegramRemoteControl
 
-`remoteBot`는 텔레그램에서 여러 로컬 프로젝트를 원격 제어하기 위한 공용 매니저입니다.
+`TelegramRemoteControl`은 텔레그램에서 여러 로컬 프로젝트를 원격 제어하기 위한 공용 매니저입니다.
 
 핵심 목적은 두 가지입니다.
 
