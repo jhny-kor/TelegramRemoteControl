@@ -142,6 +142,32 @@ nohup python3 /Users/plo/Documents/remoteBot/remote_manager.py > /Users/plo/Docu
 /job auto_coin_bot-20260314-170000
 ```
 
+대화 예시:
+
+```text
+나: /ping
+봇: pong
+    server_time: 2026-03-17 23:15:15
+
+나: /status auto_coin_bot
+봇: [auto_coin_bot] status
+    성공
+    OKX 알트: running
+    업비트 알트: running
+    텔레그램 리스너: running
+
+나: /disk
+봇: disk status
+    mac_total: 460.4 GB
+    mac_available: 76.7 GB
+    documents_total: 1.0 GB
+
+나: /codex auto_coin_bot 손절 로그를 더 자세히 남기도록 수정해줘
+봇: [auto_coin_bot] Codex 작업을 시작했습니다.
+    job_id: auto_coin_bot-20260314-170000
+    확인: /job auto_coin_bot-20260314-170000
+```
+
 ## 새 프로젝트 추가
 
 `config/projects.toml` 에 아래 형태로 프로젝트를 추가하면 됩니다.
@@ -161,6 +187,44 @@ timeout_sec = 1200
 add_dirs = []
 skip_git_repo_check = false
 ```
+
+## launchd 실행
+
+macOS에서 로그인 후 자동으로 `remote_manager`를 띄우고 싶다면 `launchd`를 사용할 수 있습니다.
+
+기본 예시 파일:
+
+- `launchd/com.plo.remotebot.plist`
+
+등록 예시:
+
+```bash
+mkdir -p ~/Library/LaunchAgents
+cp launchd/com.plo.remotebot.plist ~/Library/LaunchAgents/
+launchctl unload ~/Library/LaunchAgents/com.plo.remotebot.plist 2>/dev/null || true
+launchctl load ~/Library/LaunchAgents/com.plo.remotebot.plist
+launchctl start com.plo.remotebot
+```
+
+상태 확인과 해제:
+
+```bash
+launchctl list | grep remotebot
+launchctl stop com.plo.remotebot
+launchctl unload ~/Library/LaunchAgents/com.plo.remotebot.plist
+```
+
+`plist` 안의 Python 경로, 작업 경로, 로그 경로는 자신의 환경에 맞게 확인하는 것이 안전합니다.
+
+## 보안 체크리스트
+
+- `.env` 파일은 Git에 올리지 않습니다.
+- `allowed_chat_ids` 에 본인 또는 허용된 채팅방 id만 넣습니다.
+- `config/projects.toml` 에는 꼭 필요한 명령만 등록합니다.
+- `/run` 으로 임의 셸 명령을 받지 않도록 현재 구조를 유지합니다.
+- Telegram 봇 토큰이 노출되면 즉시 BotFather에서 재발급합니다.
+- `codex exec` 대상 프로젝트에는 민감한 파일이 있는지 먼저 확인합니다.
+- 맥북 상태 명령과 프로젝트 제어 명령은 개인 봇 또는 제한된 채팅에서만 사용하는 것을 권장합니다.
 
 ## 운영 메모
 
