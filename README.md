@@ -244,6 +244,63 @@ python3 scripts/start_managed_services.py
 python3 remote_manager.py --status
 ```
 
+현재 자동 시작 구성:
+
+- `remote_manager`: 로그인 후 `launchd` 로 자동 시작
+- `auto_coin_bot`: 부팅 전용 스크립트로 6개 관리 프로세스 자동 시작
+- `auto_stock_bot`: 현재는 상시 프로세스 자동 시작 대상이 아니며, 재부팅 후 연결/시세 점검으로 정상 동작 확인
+
+전원 알림 형식:
+
+```text
+전원 켜짐
+시간: YYYY-MM-DD HH:MM:SS
+```
+
+```text
+전원 꺼짐
+시간: YYYY-MM-DD HH:MM:SS
+```
+
+재부팅 후 체크리스트:
+
+1. 로그인 후 10~30초 정도 기다린 뒤 텔레그램 startup 메시지가 왔는지 확인합니다.
+2. `remote_manager` 상태를 확인합니다.
+
+```bash
+cd /Users/plo/Documents/remoteBot
+python3 remote_manager.py --status
+```
+
+3. `auto_coin_bot` 관리 대상 프로세스가 모두 실행 중인지 확인합니다.
+
+```bash
+cd /Users/plo/Documents/auto_coin_bot
+.venv/bin/python bot_manager.py status
+```
+
+4. `auto_stock_bot` 연결 점검과 현재가 점검이 정상 응답하는지 확인합니다.
+
+```bash
+cd /Users/plo/Documents/auto_stock_bot
+.venv/bin/python scripts/kis_check_connection.py
+.venv/bin/python scripts/kis_quote_check.py
+```
+
+5. 자동 시작 로그를 확인합니다.
+
+```bash
+cd /Users/plo/Documents/remoteBot
+tail -n 30 logs/start_managed_services.log
+```
+
+문제 발생 시 우선 확인:
+
+- 텔레그램에 `전원 켜짐` 메시지가 왔는지
+- `python3 remote_manager.py --status` 가 `running` 인지
+- `auto_coin_bot` 의 `bot_manager.py status` 가 모두 `실행 중` 인지
+- `auto_stock_bot` 의 `kis_check_connection.py` 와 `kis_quote_check.py` 가 오류 없이 끝나는지
+
 로그:
 
 - `logs/start_managed_services.log`
