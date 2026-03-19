@@ -32,7 +32,6 @@ import tomllib
 TELEGRAM_LIMIT = 4000
 APP_ROOT = Path(__file__).resolve().parent
 ANSI_ESCAPE_RE = re.compile(r"\x1B\[[0-?]*[ -/]*[@-~]")
-HOSTNAME = os.uname().nodename
 
 
 @dataclass(frozen=True)
@@ -278,10 +277,15 @@ def load_bot_token(config: AppConfig) -> str:
 
 def build_lifecycle_message(event: str, detail_lines: list[str] | None = None) -> str:
     """매니저 라이프사이클 알림 메시지를 만든다."""
+    event_titles = {
+        "startup": "전원 켜짐",
+        "shutdown": "전원 꺼짐",
+        "startup failed": "전원 켜짐 실패",
+    }
+    title = event_titles.get(event, event)
     lines = [
-        f"remoteBot {event}",
-        f"host: {HOSTNAME}",
-        f"time: {datetime.now().strftime('%Y-%m-%d %H:%M:%S')}",
+        title,
+        f"시간: {datetime.now().strftime('%Y-%m-%d %H:%M:%S')}",
     ]
     if detail_lines:
         lines.extend(detail_lines)
@@ -1300,10 +1304,7 @@ def main() -> None:
                 config,
                 bot_token,
                 "shutdown",
-                detail_lines=[
-                    f"pid: {os.getpid()}",
-                    f"reason: {shutdown_reason}",
-                ],
+                detail_lines=None,
             )
         except Exception as exc:
             append_manager_log(config, f"lifecycle notification failed: event=shutdown error={exc}")

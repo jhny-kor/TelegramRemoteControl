@@ -220,8 +220,7 @@ def main() -> int:
                 log_path,
                 "startup failed",
                 detail_lines=[
-                    f"config: {config_path}",
-                    f"error: {exc}",
+                    f"오류: {exc}",
                 ],
             )
         print(f"시작 실패: {exc}")
@@ -232,10 +231,7 @@ def main() -> int:
             raw_config,
             log_path,
             "startup",
-            detail_lines=[
-                f"config: {config_path}",
-                f"projects: {', '.join(project.name for project in projects) or '-'}",
-            ],
+            detail_lines=None,
         )
     append_log(log_path, "=== boot startup end ===")
     print("관리 대상 시작 작업이 완료되었습니다.")
