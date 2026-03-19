@@ -30,7 +30,7 @@ DEFAULT_LOG_PATH = APP_ROOT / "logs" / "start_managed_services.log"
 class AutostartProject:
     name: str
     path: Path
-    command_key: str
+    command_key: str | None
     command: str
     delay_sec: float
 
@@ -95,18 +95,25 @@ def collect_autostart_projects(raw_config: dict[str, Any]) -> list[AutostartProj
         if not enabled:
             continue
 
-        command_key = str(autostart_raw.get("command_key", "")).strip()
         commands = {
             str(key): str(value)
             for key, value in project_raw.get("commands", {}).items()
         }
-        if not command_key:
+        command = str(autostart_raw.get("command", "")).strip()
+        command_key = str(autostart_raw.get("command_key", "")).strip() or None
+        if command and command_key:
             raise ValueError(
-                f"{project_name} 의 autostart.enabled=true 이지만 command_key 가 비어 있습니다."
+                f"{project_name} 의 autostart 에 command 와 command_key 를 동시에 둘 수 없습니다."
             )
-        if command_key not in commands:
+        if command_key:
+            if command_key not in commands:
+                raise ValueError(
+                    f"{project_name} 의 autostart.command_key={command_key!r} 가 commands 에 없습니다."
+                )
+            command = commands[command_key]
+        if not command:
             raise ValueError(
-                f"{project_name} 의 autostart.command_key={command_key!r} 가 commands 에 없습니다."
+                f"{project_name} 의 autostart.enabled=true 이지만 command 또는 command_key 가 비어 있습니다."
             )
 
         projects.append(
@@ -114,7 +121,7 @@ def collect_autostart_projects(raw_config: dict[str, Any]) -> list[AutostartProj
                 name=str(project_name),
                 path=Path(str(project_raw["path"])).expanduser(),
                 command_key=command_key,
-                command=commands[command_key],
+                command=command,
                 delay_sec=float(autostart_raw.get("delay_sec", 0)),
             )
         )
@@ -178,7 +185,8 @@ def start_remote_manager(config_path: Path, log_path: Path, dry_run: bool) -> No
 
 
 def start_project(project: AutostartProject, log_path: Path, dry_run: bool) -> None:
-    title = f"{project.name}:{project.command_key}"
+    title_suffix = project.command_key if project.command_key else "autostart"
+    title = f"{project.name}:{title_suffix}"
 
     if project.delay_sec > 0:
         append_log(log_path, f"{title} | delay_sec={project.delay_sec}")

@@ -23,7 +23,7 @@ stop_telegram = ".venv/bin/python bot_manager.py stop telegram"
 
 [projects.auto_coin_bot.autostart]
 enabled = true
-command_key = "start_all"
+command = "/Users/plo/Documents/remoteBot/scripts/start_auto_coin_bot_boot.sh"
 delay_sec = 0
 
 [projects.auto_coin_bot.codex]

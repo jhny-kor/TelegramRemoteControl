@@ -466,13 +466,34 @@ def build_battery_text() -> str:
     if len(lines) >= 2:
         power_source = lines[0].replace("Now drawing from ", "").strip().strip("'")
         detail = lines[1].split("\t")[-1].strip()
+        parts = [part.strip() for part in detail.split(";") if part.strip()]
+        level = parts[0] if parts else "-"
+        raw_status = parts[1].lower() if len(parts) > 1 else ""
+        raw_time = parts[2] if len(parts) > 2 else ""
+
+        source_label = "전원 어댑터 연결" if power_source == "AC Power" else "배터리 사용 중"
+        status_map = {
+            "charging": "충전 중",
+            "discharging": "사용 중",
+            "charged": "충전 완료",
+            "finishing charge": "충전 마무리 중",
+        }
+        status_label = status_map.get(raw_status, raw_status or "-")
+        time_label = raw_time.replace(" remaining", "").strip() if raw_time else "-"
+        time_label = time_label.split(" present:", 1)[0].strip()
+        if ":" in time_label:
+            hour_text, minute_text = time_label.split(":", 1)
+            if hour_text.isdigit() and minute_text.isdigit():
+                time_label = f"{int(hour_text)}시간 {minute_text.zfill(2)}분"
         return (
-            "battery status\n"
-            f"power_source: {power_source}\n"
-            f"detail: {detail}"
+            "배터리 상태\n"
+            f"전원 공급: {source_label}\n"
+            f"배터리 잔량: {level}\n"
+            f"상태: {status_label}\n"
+            f"예상 시간: {time_label}"
         )
 
-    return f"battery status\n{output}"
+    return f"배터리 상태\n{output}"
 
 
 def build_wifi_text() -> str:
@@ -608,20 +629,20 @@ def build_disk_text() -> str:
     avail = kib_to_human(available_kib)
 
     lines = [
-        "disk status",
-        f"mac_total: {size}",
-        f"mac_available: {avail}",
-        f"mac_used: {used}",
-        f"mac_capacity: {capacity}",
+        "디스크 상태",
+        f"맥 전체 용량: {size}",
+        f"맥 잔여 용량: {avail}",
+        f"맥 사용량: {used}",
+        f"사용 비율: {capacity}",
     ]
 
     documents_dir = Path.home() / "Documents"
     documents_total, documents_lines = collect_documents_directory_usage(documents_dir)
     if documents_total is not None:
         lines.append("")
-        lines.append(f"documents_path: {documents_dir}")
-        lines.append(f"documents_total: {documents_total}")
-        lines.append("documents_directories:")
+        lines.append(f"문서 폴더 경로: {documents_dir}")
+        lines.append(f"문서 폴더 전체 사용량: {documents_total}")
+        lines.append("문서 폴더별 사용량:")
         if documents_lines:
             lines.extend(documents_lines)
         else:

@@ -7,7 +7,8 @@
 
   <key>ProgramArguments</key>
   <array>
-    <string>/Users/plo/Documents/remoteBot/scripts/run_start_managed_services.sh</string>
+    <string>/opt/homebrew/bin/python3</string>
+    <string>/Users/plo/Documents/remoteBot/scripts/start_managed_services.py</string>
   </array>
 
   <key>WorkingDirectory</key>
