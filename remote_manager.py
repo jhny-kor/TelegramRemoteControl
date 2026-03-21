@@ -52,6 +52,7 @@ class ProjectConfig:
     name: str
     path: Path
     description: str
+    managed_programs: dict[str, str]
     commands: dict[str, str]
     codex: CodexSettings
 
@@ -173,6 +174,9 @@ def load_config(config_path: Path) -> AppConfig:
             name=name,
             path=Path(project_raw["path"]).expanduser(),
             description=str(project_raw.get("description", "")),
+            managed_programs={
+                str(k): str(v) for k, v in project_raw.get("managed_programs", {}).items()
+            },
             commands={str(k): str(v) for k, v in project_raw.get("commands", {}).items()},
             codex=CodexSettings(
                 sandbox=str(codex_raw.get("sandbox", "workspace-write")),
@@ -415,6 +419,10 @@ def format_projects(config: AppConfig) -> str:
         description = f" - {project.description}" if project.description else ""
         lines.append(f"- {project.name}{description}")
         lines.append(f"  path: {project.path}")
+        if project.managed_programs:
+            lines.append("  managed_programs:")
+            for program_name, program_description in sorted(project.managed_programs.items()):
+                lines.append(f"  - {program_name}: {program_description}")
         lines.append(f"  commands: {command_keys}")
     return "\n".join(lines)
 

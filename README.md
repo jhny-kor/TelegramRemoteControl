@@ -50,6 +50,11 @@ Telegram
 - `auto_stock_bot`
   - KIS 연결 확인
   - 현재가 조회 점검
+- `batch_bot`
+  - LaunchAgent 상태 확인
+  - 자동화 작업 목록 확인
+  - LaunchAgent 재로드/중지
+  - 최근 launchd 로그 확인
 
 새 프로젝트를 붙일 때는 `config/projects.toml` 에 프로젝트 블록만 추가하면 됩니다.
 
@@ -188,6 +193,9 @@ nohup python3 /Users/plo/Documents/remoteBot/remote_manager.py > /Users/plo/Docu
 [projects.my_project]
 path = "/Users/plo/Documents/my_project"
 description = "설명"
+
+[projects.my_project.managed_programs]
+worker = "설명"
 
 [projects.my_project.commands]
 status = "python3 app.py --status"

@@ -14,6 +14,14 @@ manager_log_path = "logs/remote_manager.out"
 path = "/Users/plo/Documents/auto_coin_bot"
 description = "OKX/업비트 자동매매 프로젝트"
 
+[projects.auto_coin_bot.managed_programs]
+collector = "분석 수집기"
+okx = "OKX 봇"
+okx_btc = "OKX BTC EMA 봇"
+telegram = "텔레그램 명령 리스너"
+upbit = "업비트 봇"
+upbit_btc = "업비트 BTC EMA 봇"
+
 [projects.auto_coin_bot.commands]
 status = ".venv/bin/python bot_manager.py status"
 start_all = ".venv/bin/python bot_manager.py start all"
@@ -36,6 +44,9 @@ skip_git_repo_check = false
 path = "/Users/plo/Documents/auto_stock_bot"
 description = "한국투자증권 기반 자동주식 프로젝트"
 
+[projects.auto_stock_bot.managed_programs]
+collector = "한국주식 분석 수집기"
+
 [projects.auto_stock_bot.commands]
 status = ".venv/bin/python scripts/kis_check_connection.py"
 quote_check = ".venv/bin/python scripts/kis_quote_check.py"
@@ -44,6 +55,33 @@ quote_check = ".venv/bin/python scripts/kis_quote_check.py"
 enabled = false
 
 [projects.auto_stock_bot.codex]
+sandbox = "workspace-write"
+timeout_sec = 1200
+add_dirs = []
+skip_git_repo_check = false
+
+[projects.batch_bot]
+path = "/Users/plo/Documents/batchBot"
+description = "Codex 자동화와 로컬 jobs를 실행하는 배치 매니저"
+
+[projects.batch_bot.managed_programs]
+"automation-2" = "오늘 공모주 텔레그램 전송"
+"automation-3" = "주간 공모주 텔레그램 전송"
+"daily-log-archive" = "auto_coin_bot 로그 압축 워크플로"
+"log-archive-retry" = "같은 날 로그 압축 실패 재시도"
+
+[projects.batch_bot.commands]
+status = "python3 /Users/plo/Documents/remoteBot/scripts/batch_bot_summary.py"
+list = "python3 /Users/plo/Documents/remoteBot/scripts/batch_bot_summary.py --all"
+agent_status = "zsh scripts/manage_launch_agent.sh status"
+reload = "zsh scripts/manage_launch_agent.sh reload"
+stop = "zsh scripts/manage_launch_agent.sh stop"
+logs = "zsh scripts/manage_launch_agent.sh logs"
+
+[projects.batch_bot.autostart]
+enabled = false
+
+[projects.batch_bot.codex]
 sandbox = "workspace-write"
 timeout_sec = 1200
 add_dirs = []
